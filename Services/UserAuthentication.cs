@@ -6,6 +6,8 @@ using LibraryManagementSystem.Utils;
 
 namespace LibraryManagementSystem.Services
 {
+
+    // Class responsible for user authentication, including registration and login functionalities
     public class UserAuthentication
     {
         private readonly IConfiguration _configuration;
@@ -20,6 +22,7 @@ namespace LibraryManagementSystem.Services
             _dbHelper = new DatabaseHelper(connectionString);
             _logger = logger;
         }
+ 
         // Method to Register a new user 
         public void RegisterUser()
         {
@@ -52,7 +55,7 @@ namespace LibraryManagementSystem.Services
                 }
                 catch (ValidationException ex)
                 {
-                     _logger.LogError(ex.Message);
+                    _logger.LogError(ex.Message);
                 }
 
                 if (_dbHelper.UserExists(username))
@@ -76,36 +79,38 @@ namespace LibraryManagementSystem.Services
                 _logger.LogError($"Error: {registrationError.Message}");
             }
         }
-public User? LoginUser()
-{
-    try
-    {
-        Console.WriteLine("\nEnter username to login:");
-        string? username = Console.ReadLine();
-        Console.WriteLine("Enter password:");
-        string password = PasswordHashing();
 
-        var user = _dbHelper.GetUserByUsername(username);
-
-        if (user != null && user.Password == password)
+        // Method to log in a user
+        public User? LoginUser()
         {
-            _logger.LogInformation("Login successful!");
-            return user;
-        }
-        else
-        {
-            _logger.LogError("Invalid username or password. Please try again.");
-            return null;
-        }
-    }
-    catch (Exception loginError)
-    {
-        _logger.LogError($"Error during login: {loginError.Message}");
-        return null;
-    }
-}
+            try
+            {
+                Console.WriteLine("\nEnter username to login:");
+                string? username = Console.ReadLine();
+                Console.WriteLine("Enter password:");
+                string password = PasswordHashing();
 
-        //Method to mask the password
+                var user = _dbHelper.GetUserByUsername(username);
+
+                if (user != null && user.Password == password)
+                {
+                    _logger.LogInformation("Login successful!");
+                    return user;
+                }
+                else
+                {
+                    _logger.LogError("Invalid username or password. Please try again.");
+                    return null;
+                }
+            }
+            catch (Exception loginError)
+            {
+                _logger.LogError($"Error during login: {loginError.Message}");
+                return null;
+            }
+        }
+
+        // Method to mask the password input while typing
         private string PasswordHashing()
         {
             string password = string.Empty;

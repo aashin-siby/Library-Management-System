@@ -5,6 +5,8 @@ namespace LibraryManagementSystem.Services
     using System.Data.SqlClient;
     using LibraryManagementSystem.Models;
 
+    // Class responsible for handling database operations related to users 
+    // and books in the library management system.
     public class DatabaseHelper
     {
         private readonly string _connectionString;
@@ -14,7 +16,7 @@ namespace LibraryManagementSystem.Services
             _connectionString = connectionString;
         }
 
-        // Add the user to db
+        // Add the user to db: Inserts a new user into the database
         public void AddUser(User user)
         {
             try
@@ -39,7 +41,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        //Get the username from db for authentication
+        // Get the username from db for authentication: Retrieves a user by their username for authentication
         public User? GetUserByUsername(string username)
         {
             try
@@ -74,7 +76,7 @@ namespace LibraryManagementSystem.Services
                 throw new Exception($"Error retrieving user: {retrievingError.Message}");
             }
         }
-        // check for if user already exist
+        // Check for if user already exists: Checks if a user with the given username already exists in the database
         public bool UserExists(string username)
         {
             try
@@ -97,7 +99,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Get all books
+        // Get all books: Retrieves a list of all books from the database
         public IEnumerable<Book> GetAllBooks()
         {
             var books = new List<Book>();
@@ -134,7 +136,7 @@ namespace LibraryManagementSystem.Services
             return books;
         }
 
-        // Borrow a book
+        // Borrow a book: Records the borrowing of a book by a user in the database
         public void BorrowBook(int bookId, string userName)
         {
             try
@@ -157,7 +159,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Return a book
+        // Return a book: Records the return of a book by a user in the database
         public void ReturnBook(int bookId, string userName)
         {
             try
@@ -180,7 +182,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Get the book details from ID
+        // Get the book details from ID: Retrieves a book's details by its ID
         public Book GetBookById(int bookId)
         {
             try
@@ -216,7 +218,7 @@ namespace LibraryManagementSystem.Services
             return null;
         }
 
-        // Update book copies
+        // Update book copies: Updates the number of available copies of a book in the database
         public void UpdateBookCopies(int bookId, int quantity)
         {
             try
@@ -251,7 +253,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Add a new book
+        // Add a new book: Inserts a new book into the database
         public void AddBook(Book book)
         {
             try
@@ -275,7 +277,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Remove a book
+        // Remove a book: Deletes a book from the database by its ID
         public void RemoveBook(int bookId)
         {
             try

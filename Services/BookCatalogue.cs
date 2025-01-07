@@ -2,7 +2,8 @@ namespace LibraryManagementSystem.Services
 {
     using LibraryManagementSystem.Models;
     using System;
-
+   
+    // Class responsible for managing book-related operations in the library system
     public class BookCatalogue
     {
         private readonly ILoggerService _logger;
@@ -14,7 +15,7 @@ namespace LibraryManagementSystem.Services
             _databaseHelper = databaseHelper;
         }
 
-        // View Available Books
+        // View Available Books: Displays a list of all books in the library
         public void ViewAvailableBooks()
         {
             Console.WriteLine("\nAvailable Books:");
@@ -31,7 +32,7 @@ namespace LibraryManagementSystem.Services
             Console.WriteLine();
         }
 
-        // Borrow Book
+        // Borrow Book: Allows a user to borrow a book if they have the appropriate role and if the book is available
         public void BorrowBook(int bookId, User user)
         {
             if (user.RoleId != 1)
@@ -67,7 +68,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Return Book
+        // Return Book: Allows a user to return a borrowed book
         public void ReturnBook(int bookId, User user)
         {
             if (user.RoleId != 1)
@@ -97,7 +98,7 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Add New Book
+        // Add New Book: Allows an admin to add a new book to the catalogue
         public void AddBook(Book book, User user)
         {
             if (user.RoleId != 2)
@@ -118,10 +119,10 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Remove Book
+        // Remove Book: Allows an admin to remove a book from the catalogue
         public void RemoveBook(int bookId, User user)
         {
-            if (user.RoleId != 2) // Assuming 2 is the RoleId for Admin
+            if (user.RoleId != 2)
             {
                 _logger.LogError("Only admins can remove books.");
                 return;
@@ -139,10 +140,11 @@ namespace LibraryManagementSystem.Services
             }
         }
 
-        // Increase Book Copies
+        // Increase Book Copies: Allows an admin to add number of copies of the book
+
         public void IncreaseBookCopies(int bookId, int quantity, User user)
         {
-            if (user.RoleId != 2) // Assuming 2 is the RoleId for Admin
+            if (user.RoleId != 2)
             {
                 _logger.LogError("Only admins can increase book copies.");
                 return;

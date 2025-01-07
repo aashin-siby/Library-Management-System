@@ -1,4 +1,10 @@
-﻿using System;
+﻿// Title : Library Management System Application
+// Author: Aashin Siby
+// Created at : 22/12/2024
+// Updated at : 25/12/2024
+// Reviewed by : Sabapathi Shanmugam
+// Reviewed at : 26/12/2024
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using LibraryManagementSystem.Services;
@@ -7,11 +13,14 @@ using LibraryManagementSystem.Models;
 
 namespace LibraryManagementSystem
 {
+
+    // Main entry point for the Library Management System application
     class Program
     {
         private static ILoggerService? _logger;
         public static User? loggedInUser = null;
 
+        // Main method to run the application
         static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
@@ -65,12 +74,12 @@ namespace LibraryManagementSystem
                         Console.WriteLine("\nPlease choose an option:");
                         Console.WriteLine("1. View Available Books");
 
-                        if (loggedInUser.RoleId == 1) // User
+                        if (loggedInUser.RoleId == 1)
                         {
                             Console.WriteLine("2. Borrow a Book");
                             Console.WriteLine("3. Return a Book");
                         }
-                        else if (loggedInUser.RoleId == 2) // Admin
+                        else if (loggedInUser.RoleId == 2)
                         {
                             Console.WriteLine("2. Add a New Book");
                             Console.WriteLine("3. Remove a Book");
@@ -96,7 +105,7 @@ namespace LibraryManagementSystem
                                     }
                                     else
                                     {
-                                         _logger.LogError("Invalid ID format. Please enter a number.");
+                                        _logger.LogError("Invalid ID format. Please enter a number.");
                                     }
                                 }
                                 else if (loggedInUser.RoleId == 2)
@@ -120,7 +129,7 @@ namespace LibraryManagementSystem
                                     }
                                     else
                                     {
-                                         _logger.LogError("Invalid number format. Please enter a number.");
+                                        _logger.LogError("Invalid number format. Please enter a number.");
                                     }
                                 }
                                 break;
@@ -135,7 +144,7 @@ namespace LibraryManagementSystem
                                     }
                                     else
                                     {
-                                         _logger.LogError("Invalid ID format. Please enter a number.");
+                                        _logger.LogError("Invalid ID format. Please enter a number.");
                                     }
                                 }
                                 else if (loggedInUser.RoleId == 2)
@@ -147,7 +156,7 @@ namespace LibraryManagementSystem
                                     }
                                     else
                                     {
-                                         _logger.LogError("Invalid ID format. Please enter a number.");
+                                        _logger.LogError("Invalid ID format. Please enter a number.");
                                     }
                                 }
                                 break;
@@ -165,12 +174,12 @@ namespace LibraryManagementSystem
                                         }
                                         else
                                         {
-                                             _logger.LogError("Invalid number format. Please enter a number.");
+                                            _logger.LogError("Invalid number format. Please enter a number.");
                                         }
                                     }
                                     else
                                     {
-                                         _logger.LogError("Invalid ID format. Please enter a number.");
+                                        _logger.LogError("Invalid ID format. Please enter a number.");
                                     }
                                 }
                                 break;
@@ -198,7 +207,7 @@ namespace LibraryManagementSystem
                 _logger.LogError("User login failed. Exiting the application.");
             }
         }
-
+        // Configure and create the host builder
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
