@@ -1,7 +1,7 @@
 ﻿// Title : Library Management System Application
 // Author: Aashin Siby
 // Created at : 22/12/2024
-// Updated at : 25/12/2024
+// Updated at : 04/01/2025
 // Reviewed by : Sabapathi Shanmugam
 // Reviewed at : 26/12/2024
 using System;
@@ -194,9 +194,9 @@ namespace LibraryManagementSystem
                                 break;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception error)
                     {
-                        _logger.LogError($"An error occurred: {ex.Message}");
+                        _logger.LogError($"An error occurred: {error.Message}");
                     }
                 }
 
@@ -207,6 +207,7 @@ namespace LibraryManagementSystem
                 _logger.LogError("User login failed. Exiting the application.");
             }
         }
+        
         // Configure and create the host builder
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
